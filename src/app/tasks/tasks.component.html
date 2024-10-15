@@ -15,11 +15,11 @@
 
 <ul>
   @for (task of getSelectedUser(); track task.id) {
-  <li>
     <app-card>
+  <li>
       <app-task [task]="task" />
-    </app-card>
-  </li>
+    </li>
+  </app-card>
   }
 </ul>
 }
