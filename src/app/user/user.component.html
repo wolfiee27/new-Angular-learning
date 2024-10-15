@@ -1,0 +1,8 @@
+    <app-card>
+        <button [class.active]="selected" (click)="onClickUser()">
+            <img 
+            [src]="'assets/users/' + user.avatar " 
+            [alt]="user.name" />
+            <span>{{ user.name }}</span>
+        </button>
+    </app-card>
