@@ -1,4 +1,15 @@
-<div id="status">
+<!-- one line class example -->
+<!--  <div id="status" [class.status]=" currentStatus == 'online' ">  -->
+
+<!-- multiple class example -->
+<div
+  id="status"
+  [class]="{
+    'status-online': currentStatus === 'online',
+    'status-offline': currentStatus === 'offline',
+    'status-unkown': currentStatus === 'unkown'
+  }"
+>
   @if (currentStatus === 'online') {
   <p>Servers are online</p>
   <p>All systems are operational.</p>
