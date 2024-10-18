@@ -1,1 +1,13 @@
-<p>new-tickets works!</p>
+<form (ngSubmit)="onSubmit()">
+  <p id="new-ticket">
+    <label for="title">Titel</label>
+    <input type="text" name="title" id="title">
+  </p>
+  <p id="new-ticket">
+    <label for="request">Request</label>
+    <textarea rows="3" name="request" id="request"></textarea>
+  </p>
+  <p>
+    <button appButton icon="⌲" text="Submit" >  </button>
+  </p>
+</form>
