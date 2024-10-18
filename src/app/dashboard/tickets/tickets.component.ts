@@ -6,7 +6,7 @@ import { NewTicketsComponent } from "./new-tickets/new-tickets.component";
   standalone: true,
   imports: [NewTicketsComponent],
   templateUrl: './tickets.component.html',
-  styleUrl: './tickets.component.css'
+  styleUrl: './tickets.component.css',
 })
 export class TicketsComponent {
 
