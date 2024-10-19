@@ -9,7 +9,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class ServerStatusComponent implements OnInit, OnDestroy {
   currentStatus = 'online';
-  private timeout?: NodeJS.Timeout;
+  private timeout?: ReturnType<typeof setInterval>;
   constructor() {}
 
   ngOnInit(): void {
