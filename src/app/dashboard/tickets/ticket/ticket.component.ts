@@ -9,5 +9,6 @@ import { Ticket } from '../ticket.model';
   styleUrl: './ticket.component.css',
 })
 export class TicketComponent {
-  @Input({ required: true }) ticket!: Ticket;
+  // @Input({ required: true }) data!: Ticket;
+  data = input.required<Ticket>();
 }

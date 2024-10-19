@@ -1,6 +1,8 @@
 <ul>
   @for (ticket of ticketData; track $index) {
-  <app-ticket [ticket]="ticket" />
+  <li>
+    <app-ticket [data]="ticket" />
+  </li>
   }@empty {
   <li>no Tickets found</li>
   }
