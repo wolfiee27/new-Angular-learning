@@ -1,7 +1,7 @@
 <ul>
   @for (ticket of ticketData; track $index) {
   <li>
-    <app-ticket [data]="ticket" />
+    <app-ticket [data]="ticket" (ticketStatus)="onTicketStatusChange($event)" />
   </li>
   }@empty {
   <li>no Tickets found</li>

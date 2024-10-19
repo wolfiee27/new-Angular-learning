@@ -1,4 +1,11 @@
-import { Component, Input, input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  input,
+  Output,
+  signal,
+} from '@angular/core';
 import { Ticket } from '../ticket.model';
 
 @Component({
@@ -11,4 +18,15 @@ import { Ticket } from '../ticket.model';
 export class TicketComponent {
   // @Input({ required: true }) data!: Ticket;
   data = input.required<Ticket>();
+  toggleVisiblity = signal<boolean>(false);
+  @Output() ticketStatus = new EventEmitter<string>(false);
+
+  onToggleVisiblity() {
+    this.toggleVisiblity.update((prev) => !prev);
+  }
+
+  onCompleted() {
+    this.ticketStatus.emit(this.data().id);
+    this.onToggleVisiblity();
+  }
 }

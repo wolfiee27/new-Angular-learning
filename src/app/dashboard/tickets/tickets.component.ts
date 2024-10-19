@@ -17,9 +17,22 @@ export class TicketsComponent {
       id: `${Math.random() * 1000}`,
       title: data.title,
       request: data.request,
-      ticketStatus: 'online',
+      ticketStatus: 'open',
     };
 
     this.ticketData.push(ticket);
+  }
+
+  onTicketStatusChange(ticketId: string) {
+    this.ticketData.map((ticket) => {
+      if (ticket.id == ticketId) {
+        ticket.ticketStatus = 'closed';
+        return ticket;
+      } else {
+        return ticket;
+      }
+    });
+
+    console.log(this.ticketData);
   }
 }
