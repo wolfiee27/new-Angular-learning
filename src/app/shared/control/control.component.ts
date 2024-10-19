@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   Component,
   contentChild,
   ContentChild,
@@ -7,6 +8,7 @@ import {
   HostListener,
   inject,
   input,
+  OnInit,
 } from '@angular/core';
 
 @Component({
@@ -20,7 +22,7 @@ import {
     '(click)': 'onClick()',
   },
 })
-export class ControlComponent {
+export class ControlComponent implements OnInit, AfterContentInit {
   // @ContentChild('input') control?: ElementRef<
   //   HTMLInputElement | HTMLTextAreaElement
   // >;
@@ -28,6 +30,13 @@ export class ControlComponent {
   control =
     contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');
   label = input.required<string>();
+
+  ngOnInit(): void {
+    console.log('control-ngOnInit', this.control()?.nativeElement);
+  }
+  ngAfterContentInit(): void {
+    console.log('control-ngAfterContentInit', this.control()?.nativeElement);
+  }
 
   onClick() {
     console.log(this.control()?.nativeElement);
