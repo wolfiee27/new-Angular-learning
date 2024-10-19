@@ -1,1 +1,8 @@
-<app-new-tickets />
+<ul>
+  @for (ticket of ticketData; track $index) {
+  <app-ticket [ticket]="ticket" />
+  }@empty {
+  <li>no Tickets found</li>
+  }
+</ul>
+<app-new-tickets (ticketData)="onNewTicket($event)" />

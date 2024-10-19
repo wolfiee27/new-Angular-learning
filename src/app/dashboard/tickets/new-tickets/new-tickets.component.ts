@@ -8,11 +8,15 @@ import {
   ViewChild,
   afterRender,
   afterNextRender,
+  Output,
+  EventEmitter,
+  output,
 } from '@angular/core';
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { ControlComponent } from '../../../shared/control/control.component';
 import { FormsModule } from '@angular/forms';
 import { OnInit } from '@angular/core';
+import { Ticket } from '../ticket.model';
 
 @Component({
   selector: 'app-new-tickets',
@@ -22,10 +26,11 @@ import { OnInit } from '@angular/core';
   styleUrl: './new-tickets.component.css',
 })
 export class NewTicketsComponent implements OnInit, AfterViewInit {
+  // @Output() ticketData = new EventEmitter<{ title: string; request: string }>();
+  ticketData = output<{ title: string; request: string }>();
+
   // @ViewChild('form') form!: ElementRef<HTMLFormElement>;
   form = viewChild.required<ElementRef<HTMLFormElement>>('form');
-  titleText!: string;
-  requestText!: string;
 
   constructor() {
     // renders when ever there is any change dedected in the application
@@ -49,9 +54,8 @@ export class NewTicketsComponent implements OnInit, AfterViewInit {
     console.log('form-ngAfterViewInit', this.form().nativeElement);
   }
 
-  onSubmit(titleText: string, requestText: string) {
-    this.titleText = titleText;
-    this.requestText = requestText;
+  onSubmit(title: string, request: string) {
+    this.ticketData.emit({ title, request });
     this.form().nativeElement.reset();
   }
 }
