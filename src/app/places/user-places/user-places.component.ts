@@ -4,7 +4,7 @@ import { PlacesContainerComponent } from '../places-container/places-container.c
 import { PlacesComponent } from '../places.component';
 import { HttpClient } from '@angular/common/http';
 import { Place } from '../place.model';
-import { catchError, map, throwError } from 'rxjs';
+import { catchError, map, throwError, subscribeOn } from 'rxjs';
 import { PlacesService } from '../places.service';
 
 @Component({
@@ -35,4 +35,11 @@ export class UserPlacesComponent {
 
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
+
+  onRemovePlace(place: any) {
+    const subscription = this.placesService.removeUserPlace(place).subscribe();
+
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
+  }
+
 }
