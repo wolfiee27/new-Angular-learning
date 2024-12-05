@@ -11,6 +11,13 @@ import { FormsModule, NgForm } from '@angular/forms';
 export class LoginComponent {
 
   onSubmit(formData: NgForm) {
+
+    if (formData.form.invalid) {
+      // if the form is invalid this returns prematurely,
+      // without executing the form submisson logic
+      return;
+    }
+
     const enteredEmail = formData.form.value.email;
     const enteredPassword = formData.form.value.password;
 
