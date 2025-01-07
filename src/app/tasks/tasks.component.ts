@@ -14,6 +14,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export class TasksComponent implements OnInit {
   userId = input.required<string>();
+  message = input.required<string>();
   // order = input<'asc' | 'desc'>();
   order = signal<'asc' | 'desc'>('desc')
   private tasksService = inject(TasksService);
@@ -30,6 +31,7 @@ export class TasksComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef)
   ngOnInit(): void {
+    console.log('static data from route ' + this.message())
     const orderSubscription = this.activatedRoute.queryParams.subscribe({
       next: params => (this.order.set(params['order']))
     })

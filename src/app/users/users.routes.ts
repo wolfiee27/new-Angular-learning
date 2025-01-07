@@ -10,7 +10,10 @@ export const routes: Routes = [
   },
   {
     path: 'tasks',
-    component: TasksComponent
+    component: TasksComponent,
+    data: {
+      message: 'sampleMessage'
+    }
   },
   {
     path: 'tasks/new',
