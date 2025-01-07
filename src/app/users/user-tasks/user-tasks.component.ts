@@ -21,7 +21,13 @@ export class UserTasksComponent implements OnInit {
 
   //method 2 -> using observables
   userName = ''
+
   ngOnInit(): void {
+    //snapShot example
+    //snapshot does not change or inovke rerender like subscription does
+    console.log(this.activatedRoute.snapshot.paramMap.get('userId'));
+
+
     const subscription = this.activatedRoute.paramMap.subscribe({
       next: (paramMap) => {
         this.userName = this.usersService.users.find(user => user.id === paramMap.get('userId'))?.name || '';
