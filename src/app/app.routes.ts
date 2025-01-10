@@ -2,14 +2,15 @@ import { Routes } from "@angular/router";
 
 import { routes as userRoutes } from "./users/users.routes";
 import { NoTaskComponent } from "./tasks/no-task/no-task.component";
-import { userNameResolver, UserTasksComponent } from "./users/user-tasks/user-tasks.component";
+import { titleResolver, userNameResolver, UserTasksComponent } from "./users/user-tasks/user-tasks.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
 
 
 export const routes: Routes = [
   {
     path: '',
-    component: NoTaskComponent
+    component: NoTaskComponent,
+    title: 'No task selected'
   },
   {
     path: 'users/:userId', // <your-domain>/users/<uid>
@@ -18,7 +19,8 @@ export const routes: Routes = [
     //pass Dynamic data while navigating to this route
     resolve: {
       userName: userNameResolver
-    }
+    },
+    title: titleResolver
   },
   {
     path: '**',
