@@ -1,6 +1,6 @@
 import { Component, computed, DestroyRef, inject, input, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, ResolveFn, RouterLink, RouterOutlet, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-user-tasks',
@@ -9,32 +9,20 @@ import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './user-tasks.component.css',
   imports: [RouterOutlet, RouterLink]
 })
-export class UserTasksComponent implements OnInit {
+export class UserTasksComponent {
   userId = input.required<string>();
-  private usersService = inject(UsersService);
-  private activatedRoute = inject(ActivatedRoute);
-  private destroyRef = inject(DestroyRef);
+  userName = input.required<string>();
   //method 1 -> using signals for param extraction
   // userName = computed(() => this.usersService.users.
   //   find((user) => user.id === this.userId())?.name)
 
 
-  //method 2 -> using observables
-  userName = ''
-
-  ngOnInit(): void {
-    //snapShot example
-    //snapshot does not change or inovke rerender like subscription does
-    console.log(this.activatedRoute.snapshot.paramMap.get('userId'));
-
-
-    const subscription = this.activatedRoute.paramMap.subscribe({
-      next: (paramMap) => {
-        this.userName = this.usersService.users.find(user => user.id === paramMap.get('userId'))?.name || '';
-      }
-    })
-
-    this.destroyRef.onDestroy(subscription.unsubscribe)
-  }
-
 }
+
+export const userNameResolver: ResolveFn<string> =
+  (activatedRoute: ActivatedRouteSnapshot, routerState: RouterStateSnapshot) => {
+    const usersService = inject(UsersService);
+    const userName = usersService.users.find((u) => u.id === activatedRoute.paramMap.get('userId'))?.name || '';
+
+    return userName
+  }
